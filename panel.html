@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Klienta - BeautyRise</title>
+  <meta name="description" content="Twoje centrum dowodzenia. Wszystko, co Twoje - jest tu.">
+  <link href="logo.webp" rel="icon">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Panel Klienta - BeautyRise">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: auto; }
+
+    html, body {
+      background: #000;
+      color: #fff;
+      font-family: 'Satoshi', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    em.serif {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: #ff751f;
+    }
+
+    /* -- NAVBAR -- */
+    .navbar {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px 8px 18px;
+      border-radius: 20px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12);
+      white-space: nowrap;
+    }
+    .navbar__logo {
+      height: 56px;
+      width: auto;
+      margin: -12px 14px -12px 0;
+      display: block;
+    }
+    .navbar__link {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 12px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .navbar__link:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* -- HERO -- */
+    .hero {
+      width: 100%;
+      min-height: 100vh;
+      padding: 120px 32px 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      background: #000;
+      position: relative;
+    }
+    .hero__eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ff751f;
+      min-height: 1.2em;
+      display: inline-flex;
+      align-items: center;
+    }
+    .hero__eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 1px;
+      height: 1em;
+      background: #ff751f;
+      margin-left: 4px;
+      animation: caretBlink 0.85s steps(2) infinite;
+    }
+    .hero__eyebrow.is-done::after {
+      opacity: 0;
+      animation: none;
+      transition: opacity 0.4s ease 0.4s;
+    }
+    @keyframes caretBlink {
+      50% { opacity: 0; }
+    }
+    .hero__heading {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      text-align: center;
+      line-height: 1.1;
+      max-width: 900px;
+    }
+    .hero__heading .ch {
+      display: inline-block;
+      white-space: pre;
+    }
+    .hero__heading .ch--it {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: #ff751f;
+    }
+    .hero__heading .ch--scrambling {
+      color: rgba(255,255,255,0.55);
+    }
+    .hero__heading .ch--it.ch--scrambling {
+      color: rgba(255,117,31,0.7);
+    }
+    .hero__sub {
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      max-width: 640px;
+      line-height: 1.45;
+    }
+    .hero__body {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: 540px;
+      text-align: center;
+      margin-top: 4px;
+    }
+    .hero__body p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+    }
+    .hero__body p strong {
+      color: #fff;
+      font-weight: 500;
+    }
+    .hero__arrow {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      translate: -50% 0;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .hero__arrow svg {
+      width: 28px;
+      height: 28px;
+      stroke: #ff751f;
+    }
+    @keyframes bounce {
+      0%, 100% { translate: -50% 0; }
+      50%       { translate: -50% 8px; }
+    }
+
+    /* -- SHARED SECTIONS -- */
+    .sec {
+      width: 100%;
+      padding: 120px 32px;
+    }
+    .sec--dark { background: #050505; }
+    .sec__inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .sec__head { margin-bottom: 64px; }
+    .sec__head--center { text-align: center; }
+    .sec__title {
+      font-size: clamp(32px, 4.5vw, 54px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .sec__sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      max-width: 580px;
+    }
+    .sec__sub--center { margin: 0 auto; }
+
+    .section-closing {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.4vw, 26px);
+      color: rgba(255,255,255,0.85);
+      line-height: 1.45;
+      text-align: center;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* -- FEATURE CARDS -- */
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .feature {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 32px;
+      padding: 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .feature:last-of-type { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .feature__num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 36px;
+      color: rgba(255,117,31,0.7);
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .feature__title {
+      font-size: clamp(20px, 2.3vw, 26px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .feature__body {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+    .feature__body p + p { margin-top: 6px; }
+
+    /* -- CARE CARDS (opiekunowie) -- */
+    .care-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .care-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+    .care-card__avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.25);
+      font-size: 13px;
+    }
+    .care-card__name {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .care-card__role {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+    }
+    .care-card__contact {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+    }
+    .care-card__contact a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .care-card__contact a:hover { color: #ff751f; }
+
+    /* -- CLOSING SECTION -- */
+    .closing {
+      width: 100%;
+      padding: 140px 32px;
+      background: #030303;
+      text-align: center;
+    }
+    .closing__inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+    }
+    .closing__label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ff751f;
+    }
+    .closing__text {
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      color: #fff;
+    }
+    .closing__sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+    .closing__tagline {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.4vw, 28px);
+      color: rgba(255,255,255,0.85);
+      margin-top: 16px;
+    }
+
+    /* -- FOOTER -- */
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 56px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      text-align: center;
+    }
+    .footer__logo img {
+      height: 28px;
+      width: auto;
+      opacity: 0.7;
+    }
+    .footer__tagline {
+      font-size: clamp(20px, 2.4vw, 26px);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+      max-width: 520px;
+    }
+    .footer__meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer__meta a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer__meta a:hover { color: #fff; }
+
+    /* -- FADE-IN -- */
+    .fi {
+      opacity: 0;
+      transform: translateY(28px);
+      will-change: opacity, transform;
+      transition: opacity 0.65s cubic-bezier(0.33, 1, 0.68, 1),
+                  transform 0.65s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    .fi.on { opacity: 1; transform: translateY(0); }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero__heading    { animation: slideUp 0.7s cubic-bezier(0.32, 0.72, 0, 1) 1.15s both; }
+    .hero__sub        { animation: slideUp 0.7s cubic-bezier(0.32, 0.72, 0, 1) 1.35s both; }
+    .hero__body p     { opacity: 0; transform: translateY(20px); animation: slideUp 0.75s cubic-bezier(0.32, 0.72, 0, 1) both; }
+    .hero__body p:nth-child(1) { animation-delay: 1.6s; }
+    .hero__body p:nth-child(2) { animation-delay: 1.85s; }
+    .hero__body p:nth-child(3) { animation-delay: 2.15s; }
+    .hero__arrow      { opacity: 0; animation: fadeIn 0.6s ease 2.4s forwards, bounce 2s ease-in-out 2.4s infinite; }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* -- RESPONSIVE -- */
+    @media (max-width: 768px) {
+      .navbar__link { display: none; }
+      .navbar { padding: 7px 14px; top: 12px; }
+      .navbar__logo { height: 44px; margin: -10px 8px -10px 0; }
+
+      .hero { padding: 100px 20px 80px; }
+      .sec { padding: 88px 24px; }
+      .closing { padding: 88px 24px; }
+
+      .feature { grid-template-columns: 56px 1fr; gap: 20px; padding: 32px 0; }
+      .feature__num { font-size: 28px; }
+
+      .care-cards { grid-template-columns: 1fr; }
+      .care-card { grid-template-columns: 80px 1fr; padding: 24px; gap: 18px; }
+      .care-card__name { font-size: 20px; }
+
+      .footer { padding: 48px 24px 36px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero__heading { font-size: 36px; }
+      .sec__title { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <img src="logo-agencji-beauty-rise-biale (1).png" alt="BeautyRise" class="navbar__logo">
+    <a href="#opiekunowie" class="navbar__link">Twoi opiekunowie</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero__eyebrow">Panel Klienta BeautyRise.</span>
+    <script>
+      (function(){
+        var el = document.currentScript.previousElementSibling;
+        if (!el) return;
+        var text = el.textContent;
+        el.textContent = '';
+        var i = 0;
+        setTimeout(function tick() {
+          if (i < text.length) {
+            i++;
+            el.textContent = text.slice(0, i);
+            setTimeout(tick, 55);
+          } else {
+            setTimeout(function() { el.classList.add('is-done'); }, 600);
+          }
+        }, 250);
+      })();
+    </script>
+    <h1 class="hero__heading" id="heroHeading">Witaj z powrotem, <em class="serif">Anno.</em></h1>
+    <div class="hero__body">
+      <p>Wszystko, co Twoje - jest tu.</p>
+      <p>Nie w mailu. Nie w głowie.</p>
+      <p><strong>Tu.</strong></p>
+    </div>
+    <a href="#dokumenty" class="hero__arrow" aria-label="Przewin dalej">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- SEKCJA 1: DOKUMENTY -->
+  <section class="sec" id="dokumenty">
+    <div class="sec__inner">
+      <div class="sec__head fi">
+        <h2 class="sec__title">Twoje <em class="serif">dokumenty.</em></h2>
+        <p class="sec__sub">Umowa, faktura, ustalenia z pierwszej rozmowy - wszystko w jednym miejscu, dostepne od razu.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature fi">
+          <div class="feature__num">01</div>
+          <div>
+            <h3 class="feature__title">Umowa i faktura.</h3>
+            <div class="feature__body">
+              <p>Komplet dokumentow z podpisanym zakresem wspolpracy.</p>
+              <p>W formacie PDF, gotowy do pobrania w kazdej chwili.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">02</div>
+          <div>
+            <h3 class="feature__title">Ustalenia i notatki.</h3>
+            <div class="feature__body">
+              <p>Zapisane wnioski z kazdej rozmowy strategicznej.</p>
+              <p>Wiesz, co ustalilismy. Wiesz, co obiecalismy.</p>
+              <p>Nie ma miejsca na "ale mialo byc inaczej".</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">03</div>
+          <div>
+            <h3 class="feature__title">Briefy i materialy.</h3>
+            <div class="feature__body">
+              <p>To, co nam przekazalas - zdjecia, teksty, informacje o salonie.</p>
+              <p>Masz wglad, co jest u nas, a czego jeszcze potrzebujemy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing fi">Nic nie ginie. Nic nie trzeba wysylac drugi raz.</p>
+    </div>
+  </section>
+
+  <!-- SEKCJA 2: STATUS USLUG -->
+  <section class="sec sec--dark">
+    <div class="sec__inner">
+      <div class="sec__head fi">
+        <h2 class="sec__title">Status <em class="serif">uslug.</em></h2>
+        <p class="sec__sub">Nie musisz pisac "co u Was slycha?" - widzisz to sama, w czasie rzeczywistym.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature fi">
+          <div class="feature__num">01</div>
+          <div>
+            <h3 class="feature__title">Co jest aktywne.</h3>
+            <div class="feature__body">
+              <p>Ktore uslugi juz dzialaja, ktore sa w trakcie uruchamiania.</p>
+              <p>Zielony - dziala. Zolty - w trakcie. Szary - zaplanowane.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">02</div>
+          <div>
+            <h3 class="feature__title">Co wlasnie robimy.</h3>
+            <div class="feature__body">
+              <p>Aktualny etap prac - bez wchodzenia w szczegoly, jesli nie chcesz.</p>
+              <p>Jesli chcesz wiecej - jest komentarz od opiekuna.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">03</div>
+          <div>
+            <h3 class="feature__title">Co bedzie nastepne.</h3>
+            <div class="feature__body">
+              <p>Kolejny krok, ktory nas czeka - Twoj lub nasz.</p>
+              <p>Zeby nikt nie byl zaskoczony tym, co sie pojawi w przyszlym tygodniu.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing fi">Transparentnosc to nie uprzejmosc. To standard, z ktorego nie rezygnujemy.</p>
+    </div>
+  </section>
+
+  <!-- SEKCJA 3: OPIEKUNOWIE -->
+  <section class="sec" id="opiekunowie">
+    <div class="sec__inner">
+      <div class="sec__head fi">
+        <h2 class="sec__title">Twoi <em class="serif">opiekunowie.</em></h2>
+        <p class="sec__sub">Dwie osoby. Dwa numery. Bez przekierowan i bez biletow wsparcia.</p>
+      </div>
+
+      <div class="care-cards fi">
+        <div class="care-card">
+          <div class="care-card__avatar">zdjecie</div>
+          <div>
+            <div class="care-card__name">Wojciech Zaniewski</div>
+            <div class="care-card__role">Opiekun strategiczny · BeautyRise</div>
+            <div class="care-card__contact">
+              <a href="tel:+48510830344">+48 510 830 344</a>
+              <a href="mailto:wojtek@beautyrise.pl">wojtek@beautyrise.pl</a>
+              <a href="https://wa.me/48510830344" target="_blank" rel="noopener">WhatsApp: +48 510 830 344</a>
+            </div>
+          </div>
+        </div>
+        <div class="care-card">
+          <div class="care-card__avatar">zdjecie</div>
+          <div>
+            <div class="care-card__name">Jakub Eliasik</div>
+            <div class="care-card__role">Opiekun strategiczny · BeautyRise</div>
+            <div class="care-card__contact">
+              <a href="tel:+48534187109">+48 534 187 109</a>
+              <a href="mailto:jakub@beautyrise.pl">jakub@beautyrise.pl</a>
+              <a href="https://wa.me/48534187109" target="_blank" rel="noopener">WhatsApp: +48 534 187 109</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing fi">Pytasz ich. Oni robia reszte.<br>Taki jest podzial.</p>
+    </div>
+  </section>
+
+  <!-- SEKCJA 4: RAPORTY -->
+  <section class="sec sec--dark">
+    <div class="sec__inner">
+      <div class="sec__head fi">
+        <h2 class="sec__title">Raporty <em class="serif">miesięczne.</em></h2>
+        <p class="sec__sub">Raz w miesiacu. Liczby, wnioski, nastepne kroki. Bez zbednych slow.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature fi">
+          <div class="feature__num">01</div>
+          <div>
+            <h3 class="feature__title">Co sie wydarzylo.</h3>
+            <div class="feature__body">
+              <p>Zasieg, aktywnosc, wyniki reklam - w liczbach, nie w opisach.</p>
+              <p>Widzisz, co zdzialalismy. Widzisz rowniez, co nie zadzialalo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">02</div>
+          <div>
+            <h3 class="feature__title">Co z tego wynika.</h3>
+            <div class="feature__body">
+              <p>Interpretacja - co te liczby znacza dla Twojego salonu.</p>
+              <p>Nie "CTR wzrosl o 14%". Tylko: co to zmienia w nastepnym miesiacu.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">03</div>
+          <div>
+            <h3 class="feature__title">Co robimy dalej.</h3>
+            <div class="feature__body">
+              <p>Trzy priorytety na nastepne 30 dni.</p>
+              <p>Zatwierdzasz lub korygujesz - jedno spotkanie, 30 minut.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing fi">Nie robimy raportow dla siebie. Robimy je po to, zebys wiedziala, gdzie jestescie.</p>
+    </div>
+  </section>
+
+  <!-- SEKCJA 5: PLAN 30/90 -->
+  <section class="sec">
+    <div class="sec__inner">
+      <div class="sec__head fi">
+        <h2 class="sec__title">Plan <em class="serif">30/90.</em></h2>
+        <p class="sec__sub">Krotki horyzont i dlugi horyzont. Wiesz, gdzie jestesmy i dok­ad zmierzamy.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature fi">
+          <div class="feature__num">01</div>
+          <div>
+            <h3 class="feature__title">Pierwsze 30 dni.</h3>
+            <div class="feature__body">
+              <p>Konkretne zadania z terminami - co robimy my, co robimy razem.</p>
+              <p>Bez listy zyczen. Tylko to, co realnie da sie zrobic w miesiac.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">02</div>
+          <div>
+            <h3 class="feature__title">Kolejne 90 dni.</h3>
+            <div class="feature__body">
+              <p>Kierunek strategiczny - wzrost liczby klientek, nowe uslugi, ekspansja.</p>
+              <p>Aktualizowany po kazdym miesiacu. Nie jest sztywny, jest zywy.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">03</div>
+          <div>
+            <h3 class="feature__title">Twoj cel na rok.</h3>
+            <div class="feature__body">
+              <p>Jedno zdanie, ktore wpisalas na poczatku wspolpracy.</p>
+              <p>Jest tam. Widoczne. Nie dajemy zapomniec po co to wszystko.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing fi">Plan bez aktualizacji to zyczenie. Aktualizujemy go razem.</p>
+    </div>
+  </section>
+
+  <!-- SEKCJA 6: KALENDARZ -->
+  <section class="sec sec--dark">
+    <div class="sec__inner">
+      <div class="sec__head fi">
+        <h2 class="sec__title">Kalendarz <em class="serif">wspolpracy.</em></h2>
+        <p class="sec__sub">Kiedy co sie dzieje. Nie musisz pamietac - panel pamięta za Ciebie.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature fi">
+          <div class="feature__num">01</div>
+          <div>
+            <h3 class="feature__title">Daty spotkan.</h3>
+            <div class="feature__body">
+              <p>Rozmowy strategiczne, podsumowania miesieczne, sesje zdjęciowe.</p>
+              <p>Zapisane z wyprzedzeniem. Z przypomnieniem dzien wczesniej.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">02</div>
+          <div>
+            <h3 class="feature__title">Kamienie milowe.</h3>
+            <div class="feature__body">
+              <p>Kiedy ruszyly reklamy. Kiedy powstal profil. Kiedy byl pierwszy komentarz.</p>
+              <p>Historia buduje perspektywe. Widac, ze cos sie dzieje.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">03</div>
+          <div>
+            <h3 class="feature__title">Twoje okna dostepnosci.</h3>
+            <div class="feature__body">
+              <p>Kiedy mozesz rozmawiaz, kiedy masz klientki, kiedy nie odbierasz.</p>
+              <p>Ustawiasz raz. Nie musisz za kazdym razem wyjasniaz opiekunowi swojego tygodnia.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing fi">Czas jest jedynym zasobem, ktorego nie da sie odkupic. Szanujemy go.</p>
+    </div>
+  </section>
+
+  <!-- SEKCJA 7: BRAND ASSETS -->
+  <section class="sec">
+    <div class="sec__inner">
+      <div class="sec__head fi">
+        <h2 class="sec__title">Twoje <em class="serif">materialy.</em></h2>
+        <p class="sec__sub">Wszystko, co stworzyliśmy razem - w jednym miejscu, gotowe do pobrania.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature fi">
+          <div class="feature__num">01</div>
+          <div>
+            <h3 class="feature__title">Grafiki i kreacje.</h3>
+            <div class="feature__body">
+              <p>Posty, stories, bannery reklamowe - pogrupowane wed&uuml;g kampanii i dat.</p>
+              <p>Mozesz je pobrac, uzywac, przekazac komus innemu.</p>
+              <p>Sa Twoje.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">02</div>
+          <div>
+            <h3 class="feature__title">Teksty i scenariusze.</h3>
+            <div class="feature__body">
+              <p>Posty, opisy uslug, texty do reklam - zapisane, z data i wynikami.</p>
+              <p>Widzisz, co dzialalo. Widzisz, skad wziely sie wnioski.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">03</div>
+          <div>
+            <h3 class="feature__title">Identyfikacja wizualna.</h3>
+            <div class="feature__body">
+              <p>Jezeli stworzyliśmy Ci branding - loga, kolory, fonty - masz do tego pelny dostep.</p>
+              <p>Zawsze. Nie tylko gdy jestesmy razem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing fi">To, co stworzyliśmy - nalezy do Ciebie. Nie do nas.</p>
+    </div>
+  </section>
+
+  <!-- SEKCJA 8: POWIADOMIENIA -->
+  <section class="sec sec--dark">
+    <div class="sec__inner">
+      <div class="sec__head fi">
+        <h2 class="sec__title">Powiadomienia <em class="serif">i alerty.</em></h2>
+        <p class="sec__sub">Wazne rzeczy dochodza do Ciebie. Nie czekasz, az zapytasz.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature fi">
+          <div class="feature__num">01</div>
+          <div>
+            <h3 class="feature__title">Kiedy cos sie zmienia.</h3>
+            <div class="feature__body">
+              <p>Nowy etap prac, zmiana statusu uslugi, gotowy raport - dostajesz powiadomienie.</p>
+              <p>Nie spam. Tylko rzeczy, ktore wplywaja na Twoj salon.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">02</div>
+          <div>
+            <h3 class="feature__title">Kiedy jest pilne.</h3>
+            <div class="feature__body">
+              <p>Jesli cokolwiek wymaga Twojej decyzji - dostajesz powiadomienie z jasnym pytaniem.</p>
+              <p>Nie "odezwij sie jak bedziesz miala chwile". Tylko: konkretne pytanie, konkretny deadline.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature fi">
+          <div class="feature__num">03</div>
+          <div>
+            <h3 class="feature__title">Kiedy chcesz.</h3>
+            <div class="feature__body">
+              <p>Mozesz wlaczyc lub wylaczyc powiadomienia dla kazdego typu osobno.</p>
+              <p>Masz kontrole nad tym, co do Ciebie dociera i kiedy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-closing fi">Jesli nic sie nie dzieje - nie piszemy. Cisza oznacza, ze pracujemy.</p>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="closing__inner fi">
+      <span class="closing__label">BeautyRise</span>
+      <p class="closing__text">Inne salony walcza z chaosem.<br>Ty tu masz porzadek.</p>
+      <p class="closing__sub">Ten panel istnieje po to, zebys miala pelny obraz - bez pytania, bez szukania, bez stresu, ze cos przegapilas.</p>
+      <p class="closing__tagline">Ty prowadzisz salon. My prowadzimy reszte.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="https://beautyrise.pl" class="footer__logo" aria-label="BeautyRise">
+      <img src="logo.webp" alt="BeautyRise" loading="lazy">
+    </a>
+    <p class="footer__tagline">Ty prowadzisz salon.<br>My prowadzimy reszte.</p>
+    <div class="footer__meta">
+      <span><a href="https://beautyrise.pl">beautyrise.pl</a> · <a href="mailto:kontakt@beautyrise.pl">kontakt@beautyrise.pl</a></span>
+      <span>&copy; 2026 BeautyRise. Wszelkie prawa zastrzezone.</span>
+    </div>
+  </footer>
+
+  <!-- FADE-IN OBSERVER -->
+  <script>
+    var _fi = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('on'); _fi.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    document.querySelectorAll('.fi').forEach(function(el) { _fi.observe(el); });
+
+    document.querySelectorAll('.features').forEach(function(group) {
+      Array.from(group.children).forEach(function(child, i) {
+        child.style.transitionDelay = (i * 0.1) + 's';
+      });
+    });
+
+    /* -- DYNAMIC NAME from ?name= -- */
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var name = params.get('name');
+      if (!name) return;
+      name = name.charAt(0).toUpperCase() + name.slice(1);
+      var h1 = document.getElementById('heroHeading');
+      if (h1) {
+        h1.innerHTML = 'Witaj z powrotem, <em class="serif">' + name.replace(/</g,'&lt;') + '.</em>';
+      }
+    })();
+
+    /* -- HACKER SCRAMBLE on H1 -- */
+    (function() {
+      var h1 = document.getElementById('heroHeading');
+      if (!h1) return;
+
+      var fullText = h1.textContent.trim();
+      var splitAt = fullText.lastIndexOf(', ') + 2;
+      var prefix = fullText.slice(0, splitAt);
+      var suffix = fullText.slice(splitAt);
+
+      var segments = [
+        { text: prefix, italic: false },
+        { text: suffix, italic: true }
+      ];
+
+      var pool = '123456789';
+      var startDelay = 1150;
+      var perChar = 28;
+      var swapEvery = 26;
+      var tailHold = 60;
+
+      function rand() { return pool.charAt(Math.floor(Math.random() * pool.length)); }
+
+      h1.innerHTML = '';
+      var chars = [];
+      segments.forEach(function(seg) {
+        for (var i = 0; i < seg.text.length; i++) {
+          var c = seg.text.charAt(i);
+          var span = document.createElement('span');
+          span.className = 'ch ch--scrambling' + (seg.italic ? ' ch--it' : '');
+          if (c === ' ') {
+            span.innerHTML = '&nbsp;';
+          } else {
+            span.textContent = rand();
+          }
+          h1.appendChild(span);
+          chars.push({ el: span, char: c, isSpace: c === ' ' });
+        }
+      });
+
+      setTimeout(function() {
+        var revealed = 0;
+        var swapTimer = setInterval(function() {
+          for (var i = revealed; i < chars.length; i++) {
+            if (!chars[i].isSpace) chars[i].el.textContent = rand();
+          }
+        }, swapEvery);
+
+        var revealTimer = setInterval(function() {
+          if (revealed >= chars.length) {
+            clearInterval(revealTimer);
+            setTimeout(function() {
+              clearInterval(swapTimer);
+              chars.forEach(function(c) {
+                c.el.classList.remove('ch--scrambling');
+                if (c.isSpace) c.el.innerHTML = '&nbsp;';
+                else c.el.textContent = c.char;
+              });
+            }, tailHold);
+            return;
+          }
+          var c = chars[revealed];
+          c.el.classList.remove('ch--scrambling');
+          if (c.isSpace) c.el.innerHTML = '&nbsp;';
+          else c.el.textContent = c.char;
+          revealed++;
+        }, perChar);
+      }, startDelay);
+    })();
+  </script>
+
+  <!-- LENIS SMOOTH SCROLL -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    var isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (!isTouch) try {
+      var lenis = new Lenis({
+        duration: 1.2,
+        easing: function(t){ return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); },
+        smoothWheel: true,
+        wheelMultiplier: 0.9,
+        touchMultiplier: 0
+      });
+      function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          var target = document.querySelector(a.getAttribute('href'));
+          if (target) lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+        });
+      });
+    } catch(e) { console.warn('Lenis failed:', e); }
+  </script>
+</body>
+</html>
