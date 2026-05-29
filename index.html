@@ -2,6 +2,22 @@
 <html lang="pl">
 <head>
   <meta charset="utf-8">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P6Q6HXX0BJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P6Q6HXX0BJ');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wylp5h4dpx");
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Witamy w BeautyRise - Twoje pierwsze 72 godziny</title>
   <meta name="description" content="Dziękujemy, że jesteś. Od dziś prowadzisz tylko salon. Resztę bierzemy na siebie.">
@@ -666,7 +682,7 @@
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <img src="logo-agencji-beauty-rise-biale (1).png" alt="BeautyRise" class="navbar__logo">
+    <img fetchpriority="high" loading="eager" src="logo-agencji-beauty-rise-biale (1).png" alt="BeautyRise" class="navbar__logo">
     <a href="#kontakt" class="navbar__link">Twoi opiekunowie</a>
   </nav>
 
@@ -773,7 +789,7 @@
 
       <div class="care-cards fi">
         <div class="care-card">
-          <img class="care-card__avatar care-card__avatar--wojtek" src="wojtek-zaniewski-zespol-beauty-rise.webp" alt="Wojciech Zaniewski">
+          <img loading="lazy" class="care-card__avatar care-card__avatar--wojtek" src="wojtek-zaniewski-zespol-beauty-rise.webp" alt="Wojciech Zaniewski">
           <div>
             <div class="care-card__name">Wojciech Zaniewski</div>
             <div class="care-card__role">Opiekun strategiczny · BeautyRise</div>
@@ -785,7 +801,7 @@
           </div>
         </div>
         <div class="care-card">
-          <img class="care-card__avatar care-card__avatar--jakub" src="jakub-eliasik-zespol-beauty-rise.webp" alt="Jakub Eliasik">
+          <img loading="lazy" class="care-card__avatar care-card__avatar--jakub" src="jakub-eliasik-zespol-beauty-rise.webp" alt="Jakub Eliasik">
           <div>
             <div class="care-card__name">Jakub Eliasik</div>
             <div class="care-card__role">Opiekun strategiczny · BeautyRise</div>
@@ -936,7 +952,7 @@
   <!-- GATE MODAL -->
   <div class="gate-modal" id="gateModal" aria-hidden="true">
     <div class="gate-modal__video">
-      <video id="gateVideo" src="LANDING-PO-SPRZEDAZY-esv2-35p-bg-m-music-m (1)_1(1).mp4" poster="filmik-poster.png" controls preload="metadata" playsinline></video>
+      <video id="gateVideo" src="LANDING-PO-SPRZEDAZY-esv2-35p-bg-m-music-m (1)_1(1).mp4" poster="filmik-poster.png" controls preload="none" playsinline></video>
     </div>
     <button class="gate-modal__continue" id="gateContinue" type="button">
       Przejdź dalej →
@@ -1111,7 +1127,7 @@
   </script>
 
   <!-- LENIS SMOOTH SCROLL -->
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
   <script>
     var isTouch = window.matchMedia('(pointer: coarse)').matches;
     if (!isTouch) try {
